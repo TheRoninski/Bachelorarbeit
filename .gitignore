@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Test output
+playwright-report/
+test-results/
+coverage/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Browser profiles
+.browser-data/
+user-data-dir/
+
+# Private research data
+docs/private/
+study-data/raw/
+participants/
+
+# Operating system
+.DS_Store
+Thumbs.db
