@@ -1,0 +1,162 @@
+/*
+ * Extension styles. Everything is prefixed with gh-a11y-ext- to avoid
+ * collisions with GitHub's own classes, and nothing here overrides
+ * GitHub's global styles.
+ *
+ * Explicit GitHub light/dark mode takes precedence; otherwise the OS
+ * color-scheme preference is used as a fallback.
+ */
+
+.gh-a11y-ext-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Applied while an element is highlighted. Replaces the outline with
+   our own color instead of hiding it — we never set outline: none. */
+.gh-a11y-ext-highlight {
+  outline: 3px solid #1a7f37 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* The pulse animation is motion, not just color — respect reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .gh-a11y-ext-highlight {
+    animation: gh-a11y-ext-pulse 1.4s ease-out 2;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .gh-a11y-ext-highlight {
+    outline-color: #3fb950 !important;
+  }
+}
+:root[data-color-mode='dark'] .gh-a11y-ext-highlight {
+  outline-color: #3fb950 !important;
+}
+:root[data-color-mode='light'] .gh-a11y-ext-highlight {
+  outline-color: #1a7f37 !important;
+}
+
+@keyframes gh-a11y-ext-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(26, 127, 55, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(26, 127, 55, 0);
+  }
+}
+
+/* Help overlay */
+.gh-a11y-ext-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+  z-index: 2147483647;
+}
+
+.gh-a11y-ext-overlay-dialog {
+  position: relative;
+  background: #ffffff;
+  color: #1f2328;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(140, 149, 159, 0.3);
+  max-width: 32rem;
+  width: 90vw;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gh-a11y-ext-overlay-dialog {
+    background: #0d1117;
+    color: #e6edf3;
+    border-color: #30363d;
+  }
+}
+:root[data-color-mode='dark'] .gh-a11y-ext-overlay-dialog {
+  background: #0d1117;
+  color: #e6edf3;
+  border-color: #30363d;
+}
+:root[data-color-mode='light'] .gh-a11y-ext-overlay-dialog {
+  background: #ffffff;
+  color: #1f2328;
+  border-color: #d0d7de;
+}
+
+.gh-a11y-ext-overlay-dialog h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.gh-a11y-ext-overlay-intro {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.gh-a11y-ext-overlay-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gh-a11y-ext-overlay-list li {
+  padding: 0.4rem 0;
+  border-top: 1px solid rgba(140, 149, 159, 0.3);
+  font-size: 0.95rem;
+}
+
+.gh-a11y-ext-overlay-list li:first-child {
+  border-top: none;
+}
+
+.gh-a11y-ext-overlay-list kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: rgba(140, 149, 159, 0.15);
+  border: 1px solid rgba(140, 149, 159, 0.4);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+}
+
+.gh-a11y-ext-overlay-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  border: 1px solid rgba(140, 149, 159, 0.4);
+  background: transparent;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gh-a11y-ext-overlay-close:hover {
+  background: rgba(140, 149, 159, 0.15);
+}
+
+.gh-a11y-ext-overlay-close:focus-visible,
+.gh-a11y-ext-overlay-dialog a:focus-visible,
+.gh-a11y-ext-overlay-dialog button:focus-visible {
+  outline: 2px solid #1a7f37;
+  outline-offset: 2px;
+}
