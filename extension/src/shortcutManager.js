@@ -11,6 +11,7 @@
   'use strict';
 
   const registry = []; // { code, description, handler }
+  let isInScope = () => true;
 
   function isEditableTarget(el) {
     if (!el) return false;
@@ -28,9 +29,18 @@
     return registry.map((entry) => ({ combo: entry.comboLabel, description: entry.description }));
   }
 
+  // Single hook for "is this page relevant at all", checked before any
+  // shortcut is matched or consumed, so pages outside that scope don't
+  // get preventDefault/stopPropagation either. Defaults to always-on
+  // if the caller never sets one.
+  function setScopeGuard(fn) {
+    isInScope = typeof fn === 'function' ? fn : () => true;
+  }
+
   function onKeydown(event) {
     if (!event.altKey || !event.shiftKey || event.ctrlKey || event.metaKey) return;
     if (isEditableTarget(event.target)) return;
+    if (!isInScope()) return;
 
     const entry = registry.find((item) => item.code === event.code);
     if (!entry) return;
@@ -53,5 +63,5 @@
   }
 
   window.GHA11yExt = window.GHA11yExt || {};
-  window.GHA11yExt.shortcutManager = { register, describeAll, start, stop };
+  window.GHA11yExt.shortcutManager = { register, describeAll, start, stop, setScopeGuard };
 })();

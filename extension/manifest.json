@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Accessibility Shortcuts (Thesis Prototype)",
+  "version": "0.1.0",
+  "description": "Keyboard-only focus shortcuts and a help overlay for GitHub Issues and Pull Requests. Research prototype for a bachelor thesis on DevOps web accessibility.",
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*/*"],
+      "js": [
+        "src/selectors.js",
+        "src/focusHighlight.js",
+        "src/helpOverlay.js",
+        "src/shortcutManager.js",
+        "src/adapters/issuesAdapter.js",
+        "src/adapters/pullRequestsAdapter.js",
+        "src/content.js"
+      ],
+      "css": ["src/styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [],
+  "host_permissions": []
+}
