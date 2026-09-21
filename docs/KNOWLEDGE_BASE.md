@@ -533,6 +533,15 @@ Kernquellen:
 - NVDA-Ergebnisse sind bereits enthalten
 - Einleitung muss beide Methoden korrekt abbilden
 
+### PR-Header-Tabnav (Abschnitt 3.6) – automatisierte DOM-Beobachtung vom 2026-09-16
+
+- bisherige Angabe: PR-Header nutzt `role="tablist"`/`role="tab"` mit Pfeiltastennavigation, dokumentiert als korrektes S4-Pattern.
+- neue Beobachtung: automatisierter DOM-Scan (Playwright, kein Keyboard-only- oder NVDA-Test) auf `github.com/microsoft/vscode/pull/*` am 2026-09-16 fand **kein** Element mit `role="tab"` oder `role="tablist"` auf der gesamten Seite. Die Tab-Navigation (Conversation/Commits/Checks/Files changed) besteht dort aus einfachen `<a>`-Links ohne ARIA-Rolle, mit gehashten CSS-Modul-Klassen (`PullRequestHeaderTabNav-module__TabNavLink__*`).
+- Einordnung: reine DOM-Beobachtung an einem anderen Repository als dem ursprünglich getesteten; kein Keyboard-only- oder NVDA-Abgleich, daher kein bestätigter Widerspruch zur bisherigen Angabe (Regel: Quellcode allein beweist keine Screenreader-Barriere; DOM-Befunde müssen mit realem Verhalten verknüpft werden).
+- Reproduktion: `https://github.com/<owner>/<repo>/pull/<nr>`, unauthentifizierte Sitzung, Chrome/Playwright, `document.querySelectorAll('[role="tab"]')` und `[role="tablist"]` leer.
+- Auswirkung auf den Prototyp: `extension/src/adapters/pullRequestsAdapter.js` verlässt sich nicht mehr allein auf `role="tab"`, sondern zusätzlich auf `[aria-current="page"]` am aktiven Tab-Link und, nachrangig, auf einen Fallback über zugängliche Namen der Tab-Links („Conversation“, „Commits“, „Checks“, „Files changed“). Der `aria-current`-Fallback erwies sich in eigenen Playwright-Smoke-Tests als zuverlässiger als reiner Textabgleich, vermutlich weil der real berechnete zugängliche Name geringfügig vom rohen `textContent` abweicht — ein weiterer Hinweis darauf, dass Textabgleich allein kein verlässlicher Ersatz für echte Accessible-Name-Berechnung ist (vgl. `docs/RESEARCH_GUIDELINES.md` Abschnitt 7).
+- Status: **zu verifizieren** – ob dies eine generelle GitHub-Änderung, eine A/B-Variante oder repository-/kontextspezifisch ist, ist offen und sollte bei der nächsten Keyboard-only-/NVDA-Session am tatsächlichen Studien-Repository mitgeprüft werden.
+
 ## 18. Separate administrative Arbeit
 
 Im Chat wurde zusätzlich eine Berufspraxisreflexion erstellt. Sie ist nicht Teil der Bachelorarbeit und sollte nicht in dieses Repository oder die Forschungsdaten gemischt werden.

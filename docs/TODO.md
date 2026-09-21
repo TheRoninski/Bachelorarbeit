@@ -24,8 +24,10 @@
 - [ ] Barrier Log vollständig anlegen und alle Befunde mit IDs, Reproduktion und Evidenz erfassen.
 - [ ] Kapitel 6 vollständig und widerspruchsfrei finalisieren.
 - [ ] Kapitel-6-Einleitung auf Keyboard-only und NVDA aktualisieren.
-- [ ] Prototyp-Probleme anhand bestätigter Befunde priorisieren.
-- [ ] GitHub-Extension-MVP für Issues und Pull Requests implementieren.
+- [x] Prototyp-Probleme anhand bestätigter Befunde priorisieren. (`extension/README.md` Abschnitt 4: vier S1-Befunde aus `KNOWLEDGE_BASE.md` 3.1–3.5 sowie die Shortcut-Hilfe ohne direkten Barrier-Befund ausgewählt und je Shortcut zugeordnet)
+- [x] GitHub-Extension-MVP für Issues und Pull Requests implementieren. (`extension/` – Selector-/Fokus-Utilities, Issues- und PR-Adapter, Shortcut-Manager mit zentralem Scope-Guard, Hilfe-Overlay, Styles inkl. Reduced-Motion, Manifest V3 mit soft-navigation-fähiger Aktivierung; Keyboard-only- und NVDA-Verifikation am realen, eingeloggten Account steht noch aus, siehe neuer Punkt unten)
+- [ ] Extension-Shortcuts mit echtem, eingeloggtem GitHub-Account Keyboard-only und mit NVDA nachtesten (automatisierter Playwright-Smoke-Test lief unauthentifiziert; Kommentar-Editor-Ziel ist ohne Login gar nicht vorhanden).
+- [ ] Vergleichende manuelle Evaluation mit aktivierter und deaktivierter Erweiterung durchführen (Vorher-/Nachher-Vergleich für die in `extension/README.md` Abschnitt 4 priorisierten Befunde).
 - [ ] Studien-Build einfrieren und dokumentieren.
 - [ ] Studiendesign final entscheiden: Nutzerstudie, Expert:innen-Evaluation oder transparente Mischform.
 - [ ] Teilnehmergruppen korrekt definieren und Rekrutierung abschließen.
@@ -36,7 +38,7 @@
 
 ## Medium Priority
 
-- [ ] Playwright-Testprojekt für reproduzierbare Fokus- und Shortcut-Tests einrichten.
+- [x] Playwright-Testprojekt für reproduzierbare Fokus- und Shortcut-Tests einrichten. (`extension/tests/`, 8 Smoke-Tests gegen microsoft/vscode inkl. Soft-Navigation- und Inertness-Regression für die Aktivierungslogik; ersetzt keine manuelle Keyboard-only-/NVDA-Prüfung)
 - [ ] Axe-Scans für Basiszustände und Extension-Oberfläche einrichten.
 - [ ] Browser-, OS-, NVDA- und Plattformversionen für alle neuen Testläufe dokumentieren.
 - [ ] Testdaten und Startzustände für GitHub und GitLab reproduzierbar beschreiben.
@@ -44,7 +46,7 @@
 - [ ] Weitere Screenshots nur für zentrale, schwer verständliche Befunde ergänzen.
 - [ ] Jede Severity einzeln begründen; keine unklare Bandbreite S1–S3.
 - [ ] Positive Patterns gleichwertig dokumentieren.
-- [ ] Prototyp-README mit Installation, Shortcuts, Grenzen und Testanleitung schreiben.
+- [x] Prototyp-README mit Installation, Shortcuts, Grenzen und Testanleitung schreiben. (`extension/README.md`)
 - [ ] Architekturdiagramm der Extension erstellen, falls es die Implementierung erklärt.
 - [ ] Nutzerstudienkapitel mit Stichprobe, Aufgaben, Ablauf, Instrumenten und Auswertung erstellen.
 - [ ] Proxy- und Zielgruppenresultate getrennt oder klar gekennzeichnet auswerten.
