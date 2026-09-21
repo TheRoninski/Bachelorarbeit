@@ -1,0 +1,12 @@
+{
+  "name": "github-a11y-shortcuts-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bachelor thesis prototype: GitHub accessibility keyboard shortcuts (WebExtension). Playwright regression tests per docs/TESTING_GUIDELINES.md section 7.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}
